@@ -1,0 +1,78 @@
+<Window x:Class="ArtCollection.MainWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="Колекція творів мистецтва — ЛР4" Width="1000" Height="760"
+ MinWidth="740" MinHeight="540" WindowStartupLocation="CenterScreen"
+ Background="#E1EED5" FontFamily="Segoe UI" FontSize="14">
+ <Grid Margin="22">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <StackPanel Margin="0,0,0,15">
+   <TextBlock Text="Колекція творів мистецтва" FontSize="27" FontWeight="Bold"/>
+   <TextBlock Text="Лабораторна робота № 4 · Інтерфейси · Варіант 19" Foreground="#4B6948" Margin="0,3,0,0"/>
+  </StackPanel>
+  <Grid Grid.Row="1">
+   <Grid.ColumnDefinitions><ColumnDefinition Width="340"/><ColumnDefinition Width="18"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+   <GroupBox Header="Новий твір мистецтва">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+     <StackPanel>
+      <TextBlock Text="Тип твору:"/>
+      <ComboBox x:Name="TypeComboBox" SelectedIndex="0" SelectionChanged="TypeComboBox_SelectionChanged">
+       <ComboBoxItem Content="Картина"/><ComboBoxItem Content="Скульптура"/><ComboBoxItem Content="Фотографія"/>
+      </ComboBox>
+      <TextBlock Text="Назва:"/><TextBox x:Name="TitleTextBox"/>
+      <TextBlock Text="Рік створення:"/><TextBox x:Name="YearTextBox"/>
+      <TextBlock Text="Автор:"/><TextBox x:Name="AuthorTextBox"/>
+      <TextBlock Text="Базова вартість, грн:"/><TextBox x:Name="BaseValueTextBox"/>
+      <StackPanel x:Name="PaintingFields">
+       <TextBlock Text="Техніка:"/><TextBox x:Name="TechniqueTextBox"/>
+       <TextBlock Text="Ширина полотна, см:"/><TextBox x:Name="WidthTextBox"/>
+       <TextBlock Text="Висота полотна, см:"/><TextBox x:Name="HeightTextBox"/>
+      </StackPanel>
+      <StackPanel x:Name="SculptureFields" Visibility="Collapsed">
+       <TextBlock Text="Матеріал:"/><TextBox x:Name="MaterialTextBox"/>
+      </StackPanel>
+      <StackPanel x:Name="PhotographyFields" Visibility="Collapsed">
+       <TextBlock Text="Тип фотографії:"/><TextBox x:Name="PhotoTypeTextBox"/>
+       <TextBlock Text="Тираж, примірників:"/><TextBox x:Name="EditionSizeTextBox"/>
+      </StackPanel>
+      <Button Content="Додати твір" Click="AddButton_Click" HorizontalAlignment="Stretch"/>
+     </StackPanel>
+    </ScrollViewer>
+   </GroupBox>
+   <Grid Grid.Column="2">
+    <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <GroupBox Header="Колекція творів">
+     <Grid>
+      <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+      <ListBox x:Name="ArtworkListBox" SelectionChanged="ArtworkListBox_SelectionChanged" BorderBrush="#A8BDA4" ScrollViewer.HorizontalScrollBarVisibility="Disabled" MinHeight="80">
+       <ListBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding}" Padding="4" TextWrapping="Wrap"/></DataTemplate></ListBox.ItemTemplate>
+      </ListBox>
+      <WrapPanel Grid.Row="1" Margin="0,8,0,0">
+       <Button Content="Оцінити" Click="EvaluateButton_Click"/>
+       <Button Content="Реставрувати" Click="RestoreButton_Click"/>
+       <Button Content="Видалити" Click="DeleteButton_Click" Background="#777F70"/>
+      </WrapPanel>
+      <WrapPanel Grid.Row="2">
+       <Button Content="Підготувати до виставки" Click="ExhibitionButton_Click"/>
+       <Button Content="Реставрувати всі твори" Click="RestoreAllButton_Click"/>
+      </WrapPanel>
+     </Grid>
+    </GroupBox>
+    <GroupBox Grid.Row="1" Header="Характеристики вибраного твору">
+     <TextBlock x:Name="SelectedInfoTextBlock" Text="Оберіть твір, щоб переглянути його характеристики." MinHeight="48"/>
+    </GroupBox>
+    <GroupBox Grid.Row="2" Header="Аналітика">
+     <StackPanel>
+      <TextBlock Text="Загальна вартість творів до 1900 року:"/>
+      <TextBlock x:Name="TotalValueTextBlock" Text="0,00 грн" FontSize="19" FontWeight="Bold" Margin="0,3,0,9"/>
+      <TextBlock Text="Загальна вартість колекції:"/>
+      <TextBlock x:Name="AllValueTextBlock" Text="0,00 грн" FontSize="19" FontWeight="Bold" Margin="0,3,0,0"/>
+     </StackPanel>
+    </GroupBox>
+   </Grid>
+  </Grid>
+  <Border Grid.Row="2" Background="#F0F6EB" BorderBrush="#A6BD9A" BorderThickness="1" Padding="10" CornerRadius="3">
+   <TextBlock x:Name="StatusTextBlock" Text="Додайте твір до колекції."/>
+  </Border>
+ </Grid>
+</Window>
